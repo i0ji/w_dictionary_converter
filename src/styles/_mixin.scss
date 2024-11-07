@@ -1,4 +1,8 @@
-@mixin flex($content: null, $align: null) {
+@mixin flex($direcrion: null, $content: null, $align: null) {
+  @if $direcrion != null {
+    flex-direction: $direcrion;
+  }
+
   @if $content != null {
     justify-content: $content;
   }
@@ -6,5 +10,6 @@
   @if $align != null {
     align-items: $align;
   }
+
   display: flex;
 }

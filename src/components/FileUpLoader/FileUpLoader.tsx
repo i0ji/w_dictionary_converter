@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { saveAs } from "file-saver";
+import "./FileUpLoader.scss";
 import {
   Document,
   Packer,
@@ -10,12 +11,21 @@ import {
   TableCell,
   Paragraph,
   PageOrientation,
+  WidthType,
 } from "docx";
-import "./FileUpLoader.scss";
 
-const MAX_ROWS_PER_DOC = 50 * 30; 
+const MAX_ROWS_PER_DOC = 50 * 30;
 
-export default function FileUploader() {
+const getAlphabeticLabel = (index) => {
+  let label = "";
+  while (index >= 0) {
+    label = String.fromCharCode((index % 26) + 65) + label;
+    index = Math.floor(index / 26) - 1;
+  }
+  return label;
+};
+
+const FileUploader = () => {
   const [fileContent, setFileContent] = useState(null);
 
   const handleFileChange = async (e) => {
@@ -48,6 +58,10 @@ export default function FileUploader() {
               children: rowData.map(
                 (cellText) =>
                   new TableCell({
+                    width: {
+                      size: 2500,
+                      type: WidthType.DXA,
+                    },
                     children: [new Paragraph(cellText.trim())],
                   })
               ),
@@ -66,16 +80,14 @@ export default function FileUploader() {
         ],
       });
 
+      const alphabeticLabel = getAlphabeticLabel(i / MAX_ROWS_PER_DOC);
       const blob = await Packer.toBlob(doc);
-      saveAs(
-        blob,
-        `table_document_part_${Math.floor(i / MAX_ROWS_PER_DOC) + 1}.docx`
-      );
+      saveAs(blob, `table_document_${alphabeticLabel}.docx`);
     }
   };
 
   return (
-    <div>
+    <div id="input_area">
       <input type="file" accept=".txt" onChange={handleFileChange} />
       {fileContent && (
         <button onClick={createWordDocuments}>
@@ -84,4 +96,6 @@ export default function FileUploader() {
       )}
     </div>
   );
-}
+};
+
+export default FileUploader;
