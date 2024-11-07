@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { saveAs } from "file-saver";
-import "./FileUpLoader.scss";
 import {
   Document,
   Packer,
@@ -13,6 +12,7 @@ import {
   PageOrientation,
   WidthType,
 } from "docx";
+import styles from "./FileUploader.module.scss";
 
 const MAX_ROWS_PER_DOC = 50 * 30;
 
@@ -27,6 +27,7 @@ const getAlphabeticLabel = (index) => {
 
 const FileUploader = () => {
   const [fileContent, setFileContent] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
@@ -36,17 +37,32 @@ const FileUploader = () => {
     }
   };
 
-  const parseFileContent = (content) => {
-    return content
-      .trim()
-      .split("\n")
-      .map((line) => line.split("^"));
+  const handleDrop = async (e) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      const text = await file.text();
+      setFileContent(text);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragging(false);
   };
 
   const createWordDocuments = async () => {
     if (!fileContent) return;
 
-    const rows = parseFileContent(fileContent);
+    const rows = fileContent
+      ?.trim()
+      .split("\n")
+      .map((line) => line.split("^"));
 
     for (let i = 0; i < rows.length; i += MAX_ROWS_PER_DOC) {
       const chunk = rows.slice(i, i + MAX_ROWS_PER_DOC);
@@ -58,10 +74,7 @@ const FileUploader = () => {
               children: rowData.map(
                 (cellText) =>
                   new TableCell({
-                    width: {
-                      size: 2500,
-                      type: WidthType.DXA,
-                    },
+                    width: { size: 2500, type: WidthType.DXA },
                     children: [new Paragraph(cellText.trim())],
                   })
               ),
@@ -87,8 +100,23 @@ const FileUploader = () => {
   };
 
   return (
-    <div id="input_area">
-      <input type="file" accept=".txt" onChange={handleFileChange} />
+    <div>
+      <div
+        className={`${styles.dropArea} ${isDragging ? styles.dragging : ""}`}
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onClick={() => document.getElementById("fileInput")?.click()}
+      >
+        <p>Перетащите или выберите файл</p>
+      </div>
+      <input
+        id="fileInput"
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        style={{ display: "none" }}
+      />
       {fileContent && (
         <button onClick={createWordDocuments}>
           Сохранить в несколько Word-файлов

@@ -1,13 +1,9 @@
-import Head from "next/head";
-import FileUpLoader from "components/FileUpLoader/FileUpLoader";
+import FileUploader from "@/components/FileUploader/FileUploader";
 
 export default function Home() {
   return (
     <main>
-      <div>
-        <h1>Загрузите или ператащите *.TXT файл</h1>
-        <FileUpLoader />
-      </div>
+      <FileUploader />
     </main>
   );
 }

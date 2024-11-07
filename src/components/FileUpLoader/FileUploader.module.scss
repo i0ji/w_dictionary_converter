@@ -1,0 +1,34 @@
+@import "../../styles/mixin";
+
+.dropArea {
+  @include flex(null, center, center);
+  @apply mx-auto my-4 p-4 rounded-md text-center cursor-pointer text-4xl;
+  font-weight: bold;
+  width: 400px;
+  height: 150px;
+  background-color: rgb(224, 220, 152);
+  border: 2px dashed rgb(106, 140, 64);
+  color: rgb(51, 93, 69);
+  transition: all 0.3s ease;
+}
+
+.dropArea:hover {
+  @apply bg-teal-700;
+  color: rgb(224, 220, 152);
+  background-color: rgb(51, 93, 69);
+  transform: scale(1.1);
+}
+
+// .dropArea p {
+//   margin: 0;
+//   font-size: 16px;
+//   font-weight: bold;
+// }
+
+.dropArea.dragging {
+  @apply bg-teal-500;
+  color: rgb(224, 220, 152);
+  background-color: rgb(51, 93, 69);
+  transform: scale(1.2);
+  filter: blur(0.97);
+}

@@ -6,13 +6,16 @@
 @import "../styles/font";
 
 body {
-  @include flex(center, center);
-  @apply bg-slate-600;
+  @include flex(null, center, center);
+  background-color: rgb(50, 92, 72);
   height: 100vh;
   width: 100vw;
+  font-size: 1rem;
 
   main {
-    @apply text-4xl bg-sky-700 rounded-md p-4;
-    @include flex(center, center)
+    @apply text-4xl rounded-md py-4 text-center p-10;
+    background-color: rgb(53,92,72);
+    @include flex(null, center, center);
+    border: 3px solid rgb(230,220,149);
   }
 }
