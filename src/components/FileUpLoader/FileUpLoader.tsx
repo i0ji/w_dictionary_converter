@@ -25,9 +25,10 @@ const getAlphabeticLabel = (index) => {
   return label;
 };
 
-const FileUploader = () => {
-  const [fileContent, setFileContent] = useState(null);
+export default function FileUploader() {
+  const [fileContent, setFileContent] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
@@ -58,6 +59,8 @@ const FileUploader = () => {
 
   const createWordDocuments = async () => {
     if (!fileContent) return;
+
+    setIsLoading(true);
 
     const rows = fileContent
       ?.trim()
@@ -97,18 +100,30 @@ const FileUploader = () => {
       const blob = await Packer.toBlob(doc);
       saveAs(blob, `table_document_${alphabeticLabel}.docx`);
     }
+    setIsLoading(false);
+    setFileContent(null);
   };
+
+  //CONSOLE
+  console.log("FILE status: ", fileContent);
+  console.log("loading", isLoading);
 
   return (
     <div>
       <div
-        className={`${styles.dropArea} ${isDragging ? styles.dragging : ""}`}
+        className={`${styles.dropArea} ${isDragging ? styles.dragging : ""} ${
+          isLoading ? styles.loading : ""
+        }`}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onClick={() => document.getElementById("fileInput")?.click()}
       >
-        <p>Перетащите или выберите файл</p>
+        {!fileContent ? (
+          <p>Перетащите или выберите файл</p>
+        ) : (
+          <p onClick={createWordDocuments}>Сохранить в несколько Word-файлов</p>
+        )}
       </div>
       <input
         id="fileInput"
@@ -117,13 +132,6 @@ const FileUploader = () => {
         onChange={handleFileChange}
         style={{ display: "none" }}
       />
-      {fileContent && (
-        <button onClick={createWordDocuments}>
-          Сохранить в несколько Word-файлов
-        </button>
-      )}
     </div>
   );
-};
-
-export default FileUploader;
+}

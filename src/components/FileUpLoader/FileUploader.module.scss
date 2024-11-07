@@ -16,14 +16,17 @@
   @apply bg-teal-700;
   color: rgb(224, 220, 152);
   background-color: rgb(51, 93, 69);
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
-
 
 .dropArea.dragging {
   @apply bg-teal-500;
   color: rgb(224, 220, 152);
   background-color: rgb(51, 93, 69);
-  transform: scale(1.2);
+  transform: scale(1.1);
   filter: blur(0.97);
+}
+
+.loading {
+  background-color: rgb(78, 78, 78);
 }
