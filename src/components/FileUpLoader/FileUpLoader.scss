@@ -1,0 +1,6 @@
+@import "../../styles/mixin";
+
+div {
+  @include flex(center, center);
+  @apply bg-stone-500 w-1/3 h-1/4;
+}

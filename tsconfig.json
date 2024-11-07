@@ -4,7 +4,10 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
+    //LATER
     "strict": true,
+    "noImplicitAny": false,
+    //LATER
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -18,9 +21,12 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": ["src/*"],
+      "components/*": ["src/components/*"],
+      "styles/*": ["src/styles/*"]
+    },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
