@@ -2,32 +2,13 @@
 
 import React, { useState } from "react";
 import { saveAs } from "file-saver";
-import {
-  Document,
-  Packer,
-  Table,
-  TableRow,
-  TableCell,
-  Paragraph,
-  PageOrientation,
-  WidthType,
-} from "docx";
+import * as XLSX from "xlsx";
 import styles from "./FileUploader.module.scss";
 
-const MAX_ROWS_PER_DOC = 50 * 30;
-
-const getAlphabeticLabel = (index) => {
-  let label = "";
-  while (index >= 0) {
-    label = String.fromCharCode((index % 26) + 65) + label;
-    index = Math.floor(index / 26) - 1;
-  }
-  return label;
-};
-
-const FileUploader = () => {
-  const [fileContent, setFileContent] = useState(null);
+export default function FileUploader() {
+  const [fileContent, setFileContent] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
@@ -56,59 +37,50 @@ const FileUploader = () => {
     setIsDragging(false);
   };
 
-  const createWordDocuments = async () => {
+  const createExcelDocument = () => {
     if (!fileContent) return;
+
+    setIsLoading(true);
 
     const rows = fileContent
       ?.trim()
       .split("\n")
       .map((line) => line.split("^"));
 
-    for (let i = 0; i < rows.length; i += MAX_ROWS_PER_DOC) {
-      const chunk = rows.slice(i, i + MAX_ROWS_PER_DOC);
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.aoa_to_sheet(rows);
 
-      const table = new Table({
-        rows: chunk.map(
-          (rowData) =>
-            new TableRow({
-              children: rowData.map(
-                (cellText) =>
-                  new TableCell({
-                    width: { size: 2500, type: WidthType.DXA },
-                    children: [new Paragraph(cellText.trim())],
-                  })
-              ),
-            })
-        ),
-      });
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Data");
 
-      const doc = new Document({
-        sections: [
-          {
-            properties: {
-              page: { size: { orientation: PageOrientation.LANDSCAPE } },
-            },
-            children: [table],
-          },
-        ],
-      });
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
+    const blob = new Blob([excelBuffer], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+    saveAs(blob, "table_data.xlsx");
 
-      const alphabeticLabel = getAlphabeticLabel(i / MAX_ROWS_PER_DOC);
-      const blob = await Packer.toBlob(doc);
-      saveAs(blob, `table_document_${alphabeticLabel}.docx`);
-    }
+    setIsLoading(false);
+    setFileContent(null);
   };
 
   return (
     <div>
       <div
-        className={`${styles.dropArea} ${isDragging ? styles.dragging : ""}`}
+        className={`${styles.dropArea} ${isDragging ? styles.dragging : ""} ${
+          isLoading ? styles.loading : ""
+        }`}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onClick={() => document.getElementById("fileInput")?.click()}
       >
-        <p>Перетащите или выберите файл</p>
+        {!fileContent ? (
+          <p>Перетащите или выберите файл</p>
+        ) : (
+          <p onClick={createExcelDocument}>Сохранить в Excel</p>
+        )}
       </div>
       <input
         id="fileInput"
@@ -117,13 +89,6 @@ const FileUploader = () => {
         onChange={handleFileChange}
         style={{ display: "none" }}
       />
-      {fileContent && (
-        <button onClick={createWordDocuments}>
-          Сохранить в несколько Word-файлов
-        </button>
-      )}
     </div>
   );
-};
-
-export default FileUploader;
+}
