@@ -65,6 +65,9 @@ export default function FileUploader() {
     setFileContent(null);
   };
 
+  //CONSOLE
+  
+
   return (
     <div>
       <div

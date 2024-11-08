@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  reactStrictMode: true,
+  distDir: "build",
+  basePath: 'https://github.com/i0ji/w_dictionary_converter', 
 };
 
 export default nextConfig;
