@@ -1,9 +1,7 @@
+@use "../styles/index" as *;
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "../styles/reset";
-@import "../styles/mixin";
-@import "../styles/font";
 
 body {
   @include flex(null, center, center);
@@ -14,8 +12,8 @@ body {
 
   main {
     @apply text-4xl rounded-md py-4 text-center p-10;
-    background-color: rgb(53,92,72);
+    background-color: rgb(53, 92, 72);
     @include flex(null, center, center);
-    border: 3px solid rgb(230,220,149);
+    border: 3px solid rgb(230, 220, 149);
   }
 }

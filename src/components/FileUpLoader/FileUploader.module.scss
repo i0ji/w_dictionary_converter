@@ -1,4 +1,4 @@
-@import "../../styles/mixin";
+@use '../../styles/mixin' as *;
 
 .dropArea {
   @include flex(null, center, center);
@@ -18,7 +18,6 @@
   background-color: rgb(51, 93, 69);
   transform: scale(1.1);
 }
-
 
 .dropArea.dragging {
   @apply bg-teal-500;

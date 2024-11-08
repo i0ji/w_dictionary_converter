@@ -1,9 +1,10 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  distDir: 'build',
   reactStrictMode: true,
-  distDir: "build",
-  basePath: 'https://github.com/i0ji/w_dictionary_converter', 
+  basePath: '/w_dictionary_converter',
+  assetPrefix: '/w_dictionary_converter/'
 };
 
 export default nextConfig;
