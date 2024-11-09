@@ -1,10 +1,41 @@
-@use '/src/styles/index' as *;
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Rubik';
+  src: url('./Rubik-Medium.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a,
+a:link, 
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 body {
-  @include flex(null, center, center);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Rubik', sans-serif;
   background-color: rgb(50, 92, 72);
   height: 100vh;
   width: 100vw;
@@ -13,7 +44,25 @@ body {
   main {
     @apply text-4xl rounded-md py-4 text-center p-10;
     background-color: rgb(53, 92, 72);
-    @include flex(null, center, center);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 3px solid rgb(230, 220, 149);
   }
 }
+
+// @mixin flex($direction: null, $content: null, $align: null) {
+//   @if $direction != null {
+//     flex-direction: $direction;
+//   }
+
+//   @if $content != null {
+//     justify-content: $content;
+//   }
+
+//   @if $align != null {
+//     align-items: $align;
+//   }
+
+//   display: flex;
+// }

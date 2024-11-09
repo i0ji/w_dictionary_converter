@@ -6,7 +6,7 @@
     "skipLibCheck": true,
     //LATER
     "strict": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     //LATER
     "noEmit": true,
     "esModuleInterop": true,
@@ -22,9 +22,9 @@
       }
     ],
     "baseUrl": ".",
-    // "paths": {
-    //   "styles/*": ["./src/styles/*"]
-    // }
+    "paths": {
+      "styles/*": ["./src/styles/*"]
+    }
   },
   "include": [
     "**/*.ts",

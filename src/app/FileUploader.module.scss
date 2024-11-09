@@ -1,7 +1,7 @@
-@use '/src/styles/mixin' as *;
-
 .dropArea {
-  @include flex(null, center, center);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   @apply mx-auto my-4 p-4 rounded-md text-center cursor-pointer text-4xl;
   font-weight: bold;
   width: 400px;
@@ -28,7 +28,7 @@
 }
 
 .dropArea.disabled {
-  opacity: 0.6; /* Уменьшение непрозрачности */
+  opacity: 0.6;
   cursor: not-allowed;
-  pointer-events: none; /* Отключаем события мыши */
+  pointer-events: none;
 }

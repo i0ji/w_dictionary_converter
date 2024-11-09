@@ -1,3 +1,4 @@
+import path from 'path';
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
@@ -5,8 +6,8 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
   output: 'export',
-  // basePath: '/w_dictionary_converter',
-  // assetPrefix: '/w_dictionary_converter'
+  // basePath: '/',
+  // assetPrefix: '/',
 };
 
 export default nextConfig;
