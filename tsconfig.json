@@ -6,7 +6,7 @@
     "skipLibCheck": true,
     //LATER
     "strict": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     //LATER
     "noEmit": true,
     "esModuleInterop": true,
@@ -23,9 +23,9 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@app/*": ["src/app/*"],
-      "@components/*": ["src/components/*"],
-      "@styles/*": ["src/styles/*"],
+      "@/*": ["./src/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@components/*": ["./src/components/*"]
     }
   },
   "include": [

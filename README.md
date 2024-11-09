@@ -9,4 +9,5 @@ I decided to help him and wrote a small script for downloading TXT, and the outp
 
 KNOWN ISSUES:
 1. Not all vars are typed;
-2. FileUploader component has a "'trim' does not exist on type 'never'"
+2. FileUploader component has a "'trim' does not exist on type 'never'";
+3. Alias issues + SCSS alias issues - to go;
