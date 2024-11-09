@@ -22,11 +22,9 @@
       }
     ],
     "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"],
-      "@styles/*": ["./src/styles/*"],
-      "@components/*": ["./src/components/*"]
-    }
+    // "paths": {
+    //   "styles/*": ["./src/styles/*"]
+    // }
   },
   "include": [
     "**/*.ts",

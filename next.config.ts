@@ -1,10 +1,12 @@
 import type { NextConfig } from 'next';
-import path from 'path';
 
 const nextConfig: NextConfig = {
   distDir: 'build',
   reactStrictMode: true,
-  trailingSlash: true
+  trailingSlash: true,
+  output: 'export',
+  // basePath: '/w_dictionary_converter',
+  // assetPrefix: '/w_dictionary_converter'
 };
 
 export default nextConfig;
