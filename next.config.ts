@@ -5,8 +5,8 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
   output: 'export',
-  // basePath: '/w_dictionary_converter',
-  // assetPrefix: '/w_dictionary_converter'
+  basePath: '/w_dictionary_converter',
+  assetPrefix: '/w_dictionary_converter/'
 };
 
 export default nextConfig;
