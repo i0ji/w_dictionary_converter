@@ -2,7 +2,7 @@
   "name": "w_language_script",
   "version": "1.1.0",
   "private": true,
-  "homepage": "https://i0ji.github.io/w_dictionary_converter",
+  "homepage": "D:/code/4.work/w_dictionary_converter/",
   "scripts": {
     "dev": "next dev --turbopack",
     "start": "next start",
@@ -24,6 +24,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "docx": "^9.0.3",
+    
     "eslint": "^9",
     "eslint-config-next": "15.0.3",
     "gh-pages": "^6.2.0",
