@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   output: 'export',
   //FIXME
-  // basePath: '/w_dictionary_converter',
+  basePath: '/w_dictionary_converter',
   assetPrefix: '.',
   webpack: (config) => {
     config.resolve.alias['@styles'] = 'src/styles/*';

@@ -87,9 +87,9 @@ export default function FileUploader() {
         }}
       >
         {!fileContent ? (
-          <p>Перетащите или выберите файл</p>
+          <p>Перетащите или выберите файл!</p>
         ) : (
-          <p onClick={createExcelDocument}>Сохранить в Excel</p>
+          <p onClick={createExcelDocument}>Сохранить в Excel!</p>
         )}
       </div>
       <input
