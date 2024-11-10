@@ -1,4 +1,4 @@
-@use '/src/styles/mixin' as *;
+@use '@styles/mixin' as *;
 
 .dropArea {
   @include flex(null, center, center);
