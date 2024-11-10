@@ -7,7 +7,7 @@
     "start": "next start",
     "lint": "next lint",
     "build": "next build",
-    "deploy": "pnpm run build && gh-pages -d build"
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "file-saver": "^2.0.5",
