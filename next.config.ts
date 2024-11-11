@@ -30,7 +30,11 @@ const nextConfig: NextConfig = {
   webpack: (config) => {
     config.resolve.alias['@styles'] = 'src/styles/*';
     return config;
-  }
+  },
+  sassOptions: {
+    implementation: 'sass-embedded',
+    additionalData: `$var: red;`,
+  },
 };
 
 export default nextConfig;
