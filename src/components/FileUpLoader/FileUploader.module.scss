@@ -1,4 +1,4 @@
-@import "../../styles/mixin";
+@use '@/styles/mixin' as *;
 
 .dropArea {
   @include flex(null, center, center);
@@ -27,6 +27,13 @@
   filter: blur(0.97);
 }
 
+<<<<<<< HEAD
 .loading {
   background-color: rgb(78, 78, 78);
+=======
+.dropArea.disabled {
+  opacity: 0.6; /* Уменьшение непрозрачности */
+  cursor: not-allowed;
+  pointer-events: none; /* Отключаем события мыши */
+>>>>>>> deploy
 }

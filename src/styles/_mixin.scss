@@ -1,6 +1,6 @@
-@mixin flex($direcrion: null, $content: null, $align: null) {
-  @if $direcrion != null {
-    flex-direction: $direcrion;
+@mixin flex($direction: null, $content: null, $align: null) {
+  @if $direction != null {
+    flex-direction: $direction;
   }
 
   @if $content != null {

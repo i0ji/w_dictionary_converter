@@ -1,19 +1,11 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { saveAs } from "file-saver";
-import {
-  Document,
-  Packer,
-  Table,
-  TableRow,
-  TableCell,
-  Paragraph,
-  PageOrientation,
-  WidthType,
-} from "docx";
-import styles from "./FileUploader.module.scss";
+import React, { useState } from 'react';
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
+import styles from './FileUploader.module.scss';
 
+<<<<<<< HEAD
 const MAX_ROWS_PER_DOC = 50 * 30;
 
 const getAlphabeticLabel = (index) => {
@@ -25,30 +17,38 @@ const getAlphabeticLabel = (index) => {
   return label;
 };
 
+=======
+>>>>>>> deploy
 export default function FileUploader() {
   const [fileContent, setFileContent] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+<<<<<<< HEAD
+=======
+  const [isDisabled, setIsDisabled] = useState(false);
+>>>>>>> deploy
 
-  const handleFileChange = async (e) => {
-    const file = e.target.files[0];
-    if (file) {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
       const text = await file.text();
       setFileContent(text);
+      setIsDisabled(false);
     }
   };
 
-  const handleDrop = async (e) => {
+  const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragging(false);
     const file = e.dataTransfer.files[0];
     if (file) {
       const text = await file.text();
       setFileContent(text);
+      setIsDisabled(false);
     }
   };
 
-  const handleDragOver = (e) => {
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragging(true);
   };
@@ -57,50 +57,47 @@ export default function FileUploader() {
     setIsDragging(false);
   };
 
-  const createWordDocuments = async () => {
+  const createExcelDocument = async (
+    e: React.MouseEvent<HTMLParagraphElement>
+  ) => {
+    e.stopPropagation();
     if (!fileContent) return;
 
     setIsLoading(true);
+<<<<<<< HEAD
+=======
+    setIsDisabled(true);
+>>>>>>> deploy
 
     const rows = fileContent
-      ?.trim()
-      .split("\n")
-      .map((line) => line.split("^"));
+      .trim()
+      .split('\n')
+      .map((line) => line.split('^'));
 
-    for (let i = 0; i < rows.length; i += MAX_ROWS_PER_DOC) {
-      const chunk = rows.slice(i, i + MAX_ROWS_PER_DOC);
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.aoa_to_sheet(rows);
 
-      const table = new Table({
-        rows: chunk.map(
-          (rowData) =>
-            new TableRow({
-              children: rowData.map(
-                (cellText) =>
-                  new TableCell({
-                    width: { size: 2500, type: WidthType.DXA },
-                    children: [new Paragraph(cellText.trim())],
-                  })
-              ),
-            })
-        ),
-      });
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Data');
 
-      const doc = new Document({
-        sections: [
-          {
-            properties: {
-              page: { size: { orientation: PageOrientation.LANDSCAPE } },
-            },
-            children: [table],
-          },
-        ],
-      });
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: 'xlsx',
+      type: 'array'
+    });
+    const blob = new Blob([excelBuffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    });
+    saveAs(blob, 'table_data.xlsx');
 
+<<<<<<< HEAD
       const alphabeticLabel = getAlphabeticLabel(i / MAX_ROWS_PER_DOC);
       const blob = await Packer.toBlob(doc);
       saveAs(blob, `table_document_${alphabeticLabel}.docx`);
     }
     setIsLoading(false);
+=======
+    setIsLoading(false);
+    setIsDisabled(false);
+>>>>>>> deploy
     setFileContent(null);
   };
 
@@ -111,18 +108,31 @@ export default function FileUploader() {
   return (
     <div>
       <div
+<<<<<<< HEAD
         className={`${styles.dropArea} ${isDragging ? styles.dragging : ""} ${
           isLoading ? styles.loading : ""
+=======
+        className={`${styles.dropArea} ${isDragging ? styles.dragging : ''} ${
+          isLoading || isDisabled ? styles.disabled : ''
+>>>>>>> deploy
         }`}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
-        onClick={() => document.getElementById("fileInput")?.click()}
+        onClick={() => {
+          if (!fileContent) document.getElementById('fileInput')?.click();
+        }}
       >
         {!fileContent ? (
+<<<<<<< HEAD
           <p>Перетащите или выберите файл</p>
         ) : (
           <p onClick={createWordDocuments}>Сохранить в несколько Word-файлов</p>
+=======
+          <p>Перетащите или выберите файл!</p>
+        ) : (
+          <p onClick={createExcelDocument}>Сохранить в Excel!</p>
+>>>>>>> deploy
         )}
       </div>
       <input
@@ -130,7 +140,8 @@ export default function FileUploader() {
         type="file"
         accept=".txt"
         onChange={handleFileChange}
-        style={{ display: "none" }}
+        style={{ display: 'none' }}
+        disabled={isDisabled}
       />
     </div>
   );
