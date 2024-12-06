@@ -4,12 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-<<<<<<< HEAD
-    "predeploy": "npm run build && npm run export",
-    "deploy": "gh-pages -d out",
-    "build": "next build",
-=======
->>>>>>> deploy
     "start": "next start",
     "lint": "next lint",
     "build": "next build"

@@ -5,28 +5,11 @@ import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import styles from './FileUploader.module.scss';
 
-<<<<<<< HEAD
-const MAX_ROWS_PER_DOC = 50 * 30;
-
-const getAlphabeticLabel = (index) => {
-  let label = "";
-  while (index >= 0) {
-    label = String.fromCharCode((index % 26) + 65) + label;
-    index = Math.floor(index / 26) - 1;
-  }
-  return label;
-};
-
-=======
->>>>>>> deploy
 export default function FileUploader() {
   const [fileContent, setFileContent] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-<<<<<<< HEAD
-=======
   const [isDisabled, setIsDisabled] = useState(false);
->>>>>>> deploy
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -64,10 +47,7 @@ export default function FileUploader() {
     if (!fileContent) return;
 
     setIsLoading(true);
-<<<<<<< HEAD
-=======
     setIsDisabled(true);
->>>>>>> deploy
 
     const rows = fileContent
       .trim()
@@ -88,33 +68,16 @@ export default function FileUploader() {
     });
     saveAs(blob, 'table_data.xlsx');
 
-<<<<<<< HEAD
-      const alphabeticLabel = getAlphabeticLabel(i / MAX_ROWS_PER_DOC);
-      const blob = await Packer.toBlob(doc);
-      saveAs(blob, `table_document_${alphabeticLabel}.docx`);
-    }
-    setIsLoading(false);
-=======
     setIsLoading(false);
     setIsDisabled(false);
->>>>>>> deploy
     setFileContent(null);
   };
-
-  //CONSOLE
-  console.log("FILE status: ", fileContent);
-  console.log("loading", isLoading);
 
   return (
     <div>
       <div
-<<<<<<< HEAD
-        className={`${styles.dropArea} ${isDragging ? styles.dragging : ""} ${
-          isLoading ? styles.loading : ""
-=======
         className={`${styles.dropArea} ${isDragging ? styles.dragging : ''} ${
           isLoading || isDisabled ? styles.disabled : ''
->>>>>>> deploy
         }`}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
@@ -124,15 +87,9 @@ export default function FileUploader() {
         }}
       >
         {!fileContent ? (
-<<<<<<< HEAD
-          <p>Перетащите или выберите файл</p>
-        ) : (
-          <p onClick={createWordDocuments}>Сохранить в несколько Word-файлов</p>
-=======
           <p>Перетащите или выберите файл!</p>
         ) : (
           <p onClick={createExcelDocument}>Сохранить в Excel!</p>
->>>>>>> deploy
         )}
       </div>
       <input
