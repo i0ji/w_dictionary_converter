@@ -4,8 +4,9 @@
 @tailwind utilities;
 
 body {
+  @apply bg-teal-500;
   @include flex(null, center, center);
-  background-color: rgb(17, 36, 27);
+  // background-color: rgb(17, 36, 27);
   height: 100vh;
   width: 100vw;
   font-size: 1rem;
