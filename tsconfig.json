@@ -23,7 +23,6 @@
     ],
     "baseUrl": ".",
     "paths": {
-
       "@/*": ["./src/*"],
       "components": ["./src/components/"]
     }
@@ -36,5 +35,4 @@
     "build/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
-
 }

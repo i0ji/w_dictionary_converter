@@ -1,10 +1,12 @@
 @use '@/styles/mixin' as *;
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
   @apply bg-teal-500;
+  
   @include flex(null, center, center);
   // background-color: rgb(17, 36, 27);
   height: 100vh;
