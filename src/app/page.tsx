@@ -6,7 +6,7 @@ export default function Home() {
   console.log(process.env.NODE_ENV);
 
   return (
-    <main>
+    <main className="bg-red-500">
       <FileUploader />
     </main>
   );
