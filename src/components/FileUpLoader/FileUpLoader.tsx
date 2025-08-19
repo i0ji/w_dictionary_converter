@@ -52,7 +52,7 @@ export default function FileUploader() {
     const rows = fileContent
       .trim()
       .split('\n')
-      .map((line) => line.split('^'));
+      .map((line: string) => line.split('^'));
 
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.aoa_to_sheet(rows);
