@@ -1,4 +1,5 @@
 @use '@/styles/mixin' as *;
+@reference "tailwindcss";
 
 body {
   @include flex(null, center, center);
