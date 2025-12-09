@@ -27,12 +27,9 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "components": [
-        "./src/components/"
-      ]
+      "@/*": ["./src/*"],
+      "components": ["./src/components/"],
+      "@/styles/*": ["./src/styles/*"]
     }
   },
   "include": [
@@ -43,7 +40,5 @@
     "build/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
