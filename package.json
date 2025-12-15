@@ -11,25 +11,23 @@
   "homepage": "https://i0ji.github.io/w_dictionary_converter/",
   "dependencies": {
     "file-saver": "^2.0.5",
-    "next": "16.0.8",
-    "react": "19.2.1",
-    "react-dom": "19.2.1",
+    "next": "16.0.10",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.17",
     "@types/file-saver": "^2.0.7",
-    "@types/node": "^24",
+    "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "autoprefixer": "^10.4.22",
+    "autoprefixer": "^10.4.23",
     "docx": "^9.5.1",
-    "eslint": "^9.39.1",
-    "eslint-config-next": "16.0.8",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "16.0.10",
     "gh-pages": "^6.3.0",
-    "postcss": "^8.5.6",
-    "sass": "^1.95.0",
-    "tailwindcss": "^4.1.17",
+    "sass": "^1.96.0",
+    "tailwindcss": "^4.1.18",
     "typescript": "^5"
   }
 }

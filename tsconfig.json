@@ -1,17 +1,11 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    //LATER
     "strict": true,
     "noImplicitAny": true,
-    //LATER
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -28,8 +22,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "components": ["./src/components/"],
-      "@/styles/*": ["./src/styles/*"]
+      "components": ["./src/components/*"],
+      "styles/*": ["./src/styles/*"]
     }
   },
   "include": [
