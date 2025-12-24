@@ -40,9 +40,7 @@ export default function FileUploader() {
     setIsDragging(false);
   };
 
-  const createExcelDocument = async (
-    e: React.MouseEvent<HTMLParagraphElement>
-  ) => {
+  const createExcelDocument = async (e: React.MouseEvent<HTMLParagraphElement>) => {
     e.stopPropagation();
     if (!fileContent) return;
 
@@ -61,10 +59,10 @@ export default function FileUploader() {
 
     const excelBuffer = XLSX.write(workbook, {
       bookType: 'xlsx',
-      type: 'array'
+      type: 'array',
     });
     const blob = new Blob([excelBuffer], {
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     });
     saveAs(blob, 'table_data.xlsx');
 
